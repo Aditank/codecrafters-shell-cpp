@@ -6,19 +6,28 @@ int main() {
   std::cout << std::unitbuf;
   std::cerr << std::unitbuf;
 
-  // TODO: Uncomment the code below to pass the first stage
-  while(true){
-  std::cout << "$ ";
-  std::string input;
-  std::getline(std::cin, input);
-  if (input == "exit") {
+  while (true) {
+    std::cout << "$ ";
+    std::string input;
+    std::getline(std::cin, input);
+
+    if (input.substr(0, 4) == "exit") {
       break;
-  } 
-  else if (input.substr(0, 5) == "echo ") {
+    } else if (input.substr(5) == "exit") {
+      std::cout << input.substr(5) << " is a shell builtin" << std::endl;
+    } else if (input.substr(5) == "echo") {
+      std::cout << input.substr(5) << " is a shell builtin" << std::endl;
+    } else if (input.substr(5) == "type") {
+      std::cout << input.substr(5) << " is a shell builtin" << std::endl;
+    } else if (input.substr(0, 4) == "echo") {
       std::cout << input.substr(5) << std::endl;
-  } 
-  else {
+    } else if (input.substr(0, 4) == "type" && input.substr(5) != "exit" &&
+               input.substr(5) != "echo" && input.substr(5) != "type") {
+      std::cout << input.substr(5) << ": not found" << std::endl;
+    } else {
       std::cout << input << ": command not found" << std::endl;
     }
   }
+
+  return 0;
 }
