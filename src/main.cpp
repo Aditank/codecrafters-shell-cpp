@@ -42,17 +42,8 @@ int main() {
 
         // echo
         else if (command == "echo") {
-            std::string rest;
-
-            std::getline(ss, rest);
-
-            // Remove the leading space
-            if (!rest.empty() && rest[0] == ' ') {
-                rest.erase(0, 1);
-            }
-
-            std::cout << rest << std::endl;
-        }
+          std::cout << input.substr(5) << std::endl;
+        } 
 
         // type
         else if (command == "type") {
