@@ -11,7 +11,8 @@ bool isBuiltin(const std::string& command) {
     return command == "exit" ||
            command == "echo" ||
            command == "type" ||
-           command == "pwd";
+           command == "pwd" ||
+           command == "cd";
 }
 
 // Search PATH and return the executable's full path.
@@ -117,6 +118,17 @@ int main() {
 
             } else {
                 std::cerr << "pwd: eoror retrieving current directory" << std::endl;
+            }
+        }
+
+        else if(command =="cd"){
+            if(args.size() < 2){
+                continue;
+            }
+            const std::string& path = args[1];
+
+            if(chdir(path.c_str())!=0){
+                std::cerr << "cd : "<< path << ": no such file or directory exists please check >-<" << std::endl;
             }
         }
 
