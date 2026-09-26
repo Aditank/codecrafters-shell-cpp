@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -11,7 +10,8 @@
 bool isBuiltin(const std::string& command) {
     return command == "exit" ||
            command == "echo" ||
-           command == "type";
+           command == "type" ||
+           command == "pwd";
 }
 
 // Search PATH and return the executable's full path.
@@ -106,6 +106,17 @@ int main() {
                     std::cout << name << ": not found"
                               << std::endl;
                 }
+            }
+        }
+
+        else if(command == "pwd"){
+            char cwd[4096];
+
+            if(getcwd(cwd, sizeof(cwd)) != nullptr){
+                std::cout<<cwd<<std::endl;
+
+            } else {
+                std::cerr << "pwd: eoror retrieving current directory" << std::endl;
             }
         }
 
