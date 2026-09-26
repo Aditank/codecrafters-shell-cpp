@@ -109,7 +109,7 @@ int main() {
                 }
             }
         }
-
+        // pwd
         else if(command == "pwd"){
             char cwd[4096];
 
@@ -120,16 +120,31 @@ int main() {
                 std::cerr << "pwd: eoror retrieving current directory" << std::endl;
             }
         }
-
-        else if(command =="cd"){
-            if(args.size() < 2){
+        
+        // cd (absolute path,relative path,home directory)
+        else if (command == "cd") {
+            if (args.size() < 2) {
+                std::cerr << "cd: missing argument" << std::endl;
                 continue;
             }
-            const std::string& path = args[1];
 
-            if(chdir(path.c_str())!=0){
-                std::cerr << "cd : "<< path << ": no such file or directory exists please check >-<" << std::endl;
+            std::string path = args[1];
+
+            if (path == "~") {
+                const char* home = getenv("HOME");
+
+                if (home == nullptr) {
+                    std::cerr << "cd: HOME not set" << std::endl;
+                    continue;
+                }
+
+                path = home;
             }
+
+            if (chdir(path.c_str()) != 0) {
+                std::cerr << "cd: " << path << ": No such file or directory" << std::endl;
+                }
+            continue;
         }
 
         // External command
