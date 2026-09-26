@@ -1,34 +1,113 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/a073af49-d4d7-48fe-a820-4c727fa9466f)](https://app.codecrafters.io/users/Aditank?r=2qF)
+# C++ Unix Shell
 
-This is a starting point for C++ solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+A simple Unix-like command-line shell built in C++ as part of the [CodeCrafters Build Your Own Shell](https://codecrafters.io) challenge.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+The project implements basic shell functionality, including built-in commands, executable lookup through `PATH`, and execution of external programs with arguments.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+## Features
 
-# Passing the first stage
+- **Built-in commands**
+  - `echo` — Prints text to standard output.
+  - `exit` — Exits the shell.
+  - `pwd` — Prints the current working directory.
+  - `type` — Identifies built-in commands and locates executables in `PATH`.
+- **External command execution** — Runs programs such as `ls` and `cat`.
+- **Command-line arguments** — Supports passing arguments to external programs.
+- **PATH lookup** — Searches directories in the `PATH` environment variable for executables.
+- **Process management** — Uses `fork()`, `execv()`, and `waitpid()` to execute and manage external processes.
 
-The entry point for your `shell` implementation is in `src/main.cpp`. Study and
-uncomment the relevant code, then run the command below to execute the tests on
-our servers:
+## Tech Stack
 
-```sh
-codecrafters submit
+- C++
+- Linux
+- POSIX system calls
+- CMake
+
+## Getting Started
+
+### Prerequisites
+
+- Linux or WSL (Ubuntu)
+- GCC / G++
+- CMake
+
+### Build
+
+Clone the repository:
+
+```bash
+git clone https://github.com/aditank/codecrafters-shell-cpp.git
+cd codecrafters-shell-cpp
 ```
 
-Time to move on to the next stage!
+Compile the shell:
 
-# Stage 2 & beyond
+```bash
+g++ -std=c++17 -Wall -Wextra src/main.cpp -o shell
+```
 
-Note: This section is for stages 2 and beyond.
+### Run
 
-1. Ensure you have `cmake` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `src/main.cpp`.
-1. Run `codecrafters submit` to submit your solution to CodeCrafters. Test
-   output will be streamed to your terminal.
+```bash
+./shell
+```
+
+## Usage
+
+Once the shell starts, enter commands at the prompt.
+
+```text
+$ pwd
+/home/user/codecrafters-shell-cpp
+
+$ echo Hello World
+Hello World
+
+$ type ls
+ls is /usr/bin/ls
+
+$ ls -l
+total  ...
+
+$ exit
+```
+
+The output of commands such as `pwd` and `ls` depends on your environment.
+
+## Project Structure
+
+```text
+codecrafters-shell-cpp/
+├── src/
+│   └── main.cpp
+├── CMakeLists.txt
+├── README.md
+└── .gitignore
+```
+
+## Learning Objectives
+
+This project provides practical experience with:
+
+- C++ programming and standard library features
+- Linux command-line environments
+- Process creation and execution
+- Environment variables and executable lookup
+- Basic shell architecture
+
+## Current Limitations
+
+- Quoted arguments and advanced shell parsing are not yet supported.
+- Pipes and input/output redirection are not yet implemented.
+- Command history is not yet implemented.
+
+## Future Improvements
+
+- Support quoted arguments and escape sequences
+- Implement pipes and I/O redirection
+- Add command history
+- Improve error handling and command parsing
+
+## Acknowledgments
+
+Built while following the [CodeCrafters Build Your Own Shell](https://codecrafters.io) challenge.
